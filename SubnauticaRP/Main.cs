@@ -7,15 +7,15 @@ namespace SubnauticaRP
 {
     public class Main
     {
-        private static DiscordRPC.RichPresence Presence;
+        public static DiscordRPC.RichPresence Presence;
 
         public static void Patch()
         {
             // Initialize the client
             InitDiscord();
 
-            // Set the presence
-            DiscordRPC.UpdatePresence(ref Presence);
+            // Load controller
+            DiscordController.Load();
         }
 
         public static void InitDiscord()
@@ -33,10 +33,14 @@ namespace SubnauticaRP
             Presence = new DiscordRPC.RichPresence
             {
                 largeImageKey = "subnautica_main",
-                state = "Test state",
-                details = "Test details",
-                largeImageText = "Test largeImageText"
+                details = "In Menu",
             };
+
+            // Run the callbacks
+            DiscordRPC.RunCallbacks();
+
+            // Set the presence
+            DiscordRPC.UpdatePresence(ref Presence);
         }
 
         private static void DisconnectedCallback(int errorCode, string message)
@@ -57,6 +61,111 @@ namespace SubnauticaRP
         {
             // Log
             Console.WriteLine("Discord is READY!");
+        }
+    }
+
+    public class Utility
+    {
+        private static Dictionary<string, string> biomeMap = new Dictionary<string, string>()
+        {
+            {
+                "lostriver",
+                "Lost River"
+            },
+            {
+                "kelpforest",
+                "Kelp Forest"
+            },
+            {
+                "grassy",
+                "Grassy Plateus"
+            },
+            {
+                "underwaterislands",
+                "Underwater Islands"
+            },
+            {
+                "island",
+                "Island"
+            },
+            {
+                "lava",
+                "Lava Zone"
+            },
+            {
+                "ilz",
+                "Inactive Lava Zone"
+            },
+            {
+                "mushroom",
+                "Mushroom Forest"
+            },
+            {
+                "bloodkelp",
+                "Blood Kelp"
+            },
+            {
+                "dunes",
+                "Sand Dunes"
+            },
+            {
+                "grandReef",
+                "Grand Reef"
+            },
+            {
+                "koosh",
+                "Bulb Zone"
+            },
+            {
+                "mountains",
+                "Mountains"
+            },
+            {
+                "sparse",
+                "Sparse Reef"
+            },
+            {
+                "jellyshroom",
+                "Jellyshroom"
+            },
+            {
+                "safe",
+                "Safe Shallows"
+            },
+            {
+                "crash",
+                "Crash Zone"
+            },
+            {
+                "crag",
+                "Crag Field"
+            }
+        };
+
+        public static string GetBiomeDisplayName(string biomeStr)
+        {
+            foreach(var biome in biomeMap)
+            {
+                if(biomeStr.ToLower().Contains(biome.Key))
+                {
+                    return biome.Value;
+                }
+            }
+
+            return biomeStr;
+        }
+
+        public static string GetBiomeStringName(string biomeDisplayName)
+        {
+            foreach(var biome in biomeMap)
+            {
+                if(biome.Value.Contains(biomeDisplayName))
+                {
+                    return biome.Key;
+                }
+            }
+
+            return "";
         }
     }
 }
