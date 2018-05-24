@@ -21,6 +21,8 @@ namespace SubnauticaRP
 
         private static string currentSceneName;
 
+        private float nextTime;
+
         public static void Load()
         {
             var go = new GameObject("DiscordController").AddComponent<DiscordController>().gameObject;
@@ -57,6 +59,8 @@ namespace SubnauticaRP
 
         private void UpdatePresence()
         {
+            DiscordRPC.RunCallbacks();
+
             if(state != PlayerState.Playing)
             {
                 Main.Presence.details = (state == PlayerState.Menu) ? "In Menu" : "Loading";
@@ -68,13 +72,16 @@ namespace SubnauticaRP
                 return;
             }
 
+            Main.Presence.largeImageKey = "";
+
             var biome = Utility.GetBiomeDisplayName(Player.main.GetBiomeString());
+            var stringName = Utility.GetBiomeStringName(biome);
             Main.Presence.details = "At " + biome;
-            Main.Presence.largeImageKey = Utility.GetBiomeStringName(biome);
+            Main.Presence.largeImageKey = stringName;
 
             var subRoot = Player.main.GetCurrentSub();
             var vehicle = Player.main.GetVehicle();
-            var depth = Player.main.GetDepth();
+            var depth = Mathf.Round(Player.main.GetDepth());
             if (subRoot)
             {
                 var type = subRoot.GetType().Equals(typeof(BaseRoot)) ? "Base" : "Cyclops";
@@ -103,17 +110,5 @@ namespace SubnauticaRP
 
             DiscordRPC.UpdatePresence(ref Main.Presence);
         }
-
-        //private IEnumerator Start()
-        //{
-        //    yield return new WaitForSeconds(1f);
-        //    while ((!uGUI_SceneLoading.IsLoadingScreenFinished || uGUI.main.loading.IsLoading) && currentSceneName == "Main")
-        //    {
-        //        state = PlayerState.Loading;
-        //        yield return null;
-        //    }
-
-        //    state = PlayerState.Playing;
-        //}
     }
 }
