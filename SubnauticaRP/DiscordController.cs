@@ -67,6 +67,7 @@ namespace SubnauticaRP
                 Main.Presence.state = "";
                 Main.Presence.largeImageKey = "subnautica_main";
                 Main.Presence.smallImageKey = "";
+
                 DiscordRPC.UpdatePresence(ref Main.Presence);
 
                 return;
@@ -86,7 +87,9 @@ namespace SubnauticaRP
             {
                 var type = subRoot.GetType().Equals(typeof(BaseRoot)) ? "Base" : "Cyclops";
                 Main.Presence.state = "In " + type;
-                Main.Presence.smallImageKey = type.ToLower();
+
+                if(type != "Base")
+                    Main.Presence.smallImageKey = type.ToLower();
             }
             else if (vehicle)
             {

@@ -85,7 +85,7 @@ namespace SubnauticaRP
                 "Underwater Islands"
             },
             {
-                "island",
+                "floatingisland",
                 "Island"
             },
             {
@@ -109,7 +109,7 @@ namespace SubnauticaRP
                 "Sand Dunes"
             },
             {
-                "grandReef",
+                "grandreef",
                 "Grand Reef"
             },
             {
@@ -166,6 +166,28 @@ namespace SubnauticaRP
             }
 
             return "";
+        }
+        
+        public static string GetPresenceDebug(DiscordRPC.RichPresence presence)
+        {
+            var returnString = 
+                "state: " + presence.state + Environment.NewLine +
+                "details: " + presence.details + Environment.NewLine +
+                "startTimestamp: " + presence.startTimestamp + Environment.NewLine +
+                "endTimestamp: " + presence.endTimestamp + Environment.NewLine +
+                "largeImageKey: " + presence.largeImageKey + Environment.NewLine +
+                "largeImageText: " + presence.largeImageText + Environment.NewLine +
+                "smallImageKey: " + presence.smallImageKey + Environment.NewLine +
+                "smallImageText: " + presence.smallImageText + Environment.NewLine +
+                "partyId: " + presence.partyId + Environment.NewLine +
+                "partySize: " + presence.partySize + Environment.NewLine +
+                "partyMax: " + presence.partyMax + Environment.NewLine +
+                "matchSecret: " + presence.matchSecret + Environment.NewLine +
+                "joinSecret: " + presence.joinSecret + Environment.NewLine +
+                "spectateSecret: " + presence.spectateSecret + Environment.NewLine +
+                "instance: " + presence.instance;
+
+            return returnString;
         }
     }
 }
