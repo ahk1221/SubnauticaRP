@@ -42,16 +42,16 @@ namespace SubnauticaRP
             public bool instance;
         }
 
-        [DllImport("discord-rpc", EntryPoint = "Discord_Initialize", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("./QMods/SubnauticaRP/discord-rpc.dll", EntryPoint = "Discord_Initialize", CallingConvention = CallingConvention.Cdecl)]
         public static extern void Initialize(string applicationId, ref EventHandlers handlers, bool autoRegister, string optionalSteamId);
 
-        [DllImport("discord-rpc", EntryPoint = "Discord_UpdatePresence", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("./QMods/SubnauticaRP/discord-rpc.dll", EntryPoint = "Discord_UpdatePresence", CallingConvention = CallingConvention.Cdecl)]
         public static extern void UpdatePresence(ref RichPresence presence);
 
-        [DllImport("discord-rpc", EntryPoint = "Discord_RunCallbacks", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("./QMods/SubnauticaRP/discord-rpc.dll", EntryPoint = "Discord_RunCallbacks", CallingConvention = CallingConvention.Cdecl)]
         public static extern void RunCallbacks();
 
-        [DllImport("discord-rpc", EntryPoint = "Discord_Shutdown", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport("./QMods/SubnauticaRP/discord-rpc.dll", EntryPoint = "Discord_Shutdown", CallingConvention = CallingConvention.Cdecl)]
         public static extern void Shutdown();
     }
 }
