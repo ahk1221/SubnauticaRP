@@ -86,7 +86,7 @@ namespace SubnauticaRP
             },
             {
                 "floatingisland",
-                "Island"
+                "Floating Island"
             },
             {
                 "lava",
@@ -159,7 +159,7 @@ namespace SubnauticaRP
         {
             foreach(var biome in biomeMap)
             {
-                if(biome.Value.Contains(biomeDisplayName))
+                if(biomeDisplayName.Equals(biome.Value))
                 {
                     return biome.Key;
                 }

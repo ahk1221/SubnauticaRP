@@ -21,8 +21,6 @@ namespace SubnauticaRP
 
         private static string currentSceneName;
 
-        private float nextTime;
-
         public static void Load()
         {
             var go = new GameObject("DiscordController").AddComponent<DiscordController>().gameObject;
@@ -109,7 +107,7 @@ namespace SubnauticaRP
             }
 
             if (Main.Presence.state != "")
-                Main.Presence.state += " (Depth: " + depth + ")";
+                Main.Presence.state += " (Depth: " + depth + "m)";
 
             DiscordRPC.UpdatePresence(ref Main.Presence);
         }
