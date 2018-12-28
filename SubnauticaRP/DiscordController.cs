@@ -17,14 +17,18 @@ namespace SubnauticaRP
 
     public class DiscordController : MonoBehaviour
     {
+        private static GameObject controllerGO;
+
         private static PlayerState state;
 
         private static string currentSceneName;
 
         public static void Load()
         {
-            var go = new GameObject("DiscordController").AddComponent<DiscordController>().gameObject;
-            DontDestroyOnLoad(go);
+            controllerGO = new GameObject("DiscordController");
+            controllerGO.AddComponent<DiscordController>();
+            controllerGO.AddComponent<SceneCleanerPreserve>();
+            DontDestroyOnLoad(controllerGO);
 
             SceneManager.sceneLoaded += SceneManager_sceneLoaded;
         }
@@ -37,6 +41,11 @@ namespace SubnauticaRP
 
             if (currentSceneName.ToLower().Contains("menu"))
                 state = PlayerState.Menu;
+
+            if(controllerGO == null)
+            {
+                controllerGO = new GameObject("DiscordController").AddComponent<DiscordController>().gameObject;
+            }
         }
 
         private void Update()
